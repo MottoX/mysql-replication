@@ -12,7 +12,5 @@ COPY replication-entrypoint.sh \
      init_slave.sh \
      /
 
-RUN chmod +x /replication-entrypoint.sh
-
-ENTRYPOINT ["/replication-entrypoint.sh"]
+ENTRYPOINT ["sh","/replication-entrypoint.sh"]
 CMD ["mysqld"]
