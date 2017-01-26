@@ -1,9 +1,9 @@
 FROM mysql/mysql-server:5.7
 MAINTAINER MottoX <micrari@gmail.com>
 
+ENV SERVER_ID 1
 ENV REPLICATION_USER repl
 ENV REPLICATION_PASSWORD test
-ENV SERVER_ID 1
 
 COPY replication-entrypoint.sh \
      master.cnf \
@@ -12,5 +12,5 @@ COPY replication-entrypoint.sh \
      init_slave.sh \
      /
 
-ENTRYPOINT ["sh","/replication-entrypoint.sh"]
+ENTRYPOINT ["sh", "/replication-entrypoint.sh"]
 CMD ["mysqld"]
