@@ -23,12 +23,12 @@ Make sure every node has a **different** server id.
 
 2. Run master node with
     ```sh
-    docker run --name master -d -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e SERVER_ID=1 mottox/mysql-replication
+    docker run --name master -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e SERVER_ID=1 -d mottox/mysql-replication
     ```
 
 3. Run slave node with
     ```sh
-    docker run -d --name slave -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e SERVER_ID=2 --link master:replication mottox/mysql-replication
+    docker run --name slave -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e SERVER_ID=2 --link master:replication -d mottox/mysql-replication
     ```
 
 4. Check if replication is ready
