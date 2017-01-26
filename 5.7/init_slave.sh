@@ -9,7 +9,6 @@ mysql -uroot -e "RESET MASTER; \
     MASTER_PASSWORD='$REPLICATION_PASSWORD';"
 
 # dump data from master to slave
-
 mysqldump \
     --host=$MASTER_HOST \
     --port=$MASTER_PORT \
@@ -21,9 +20,6 @@ mysqldump \
     --flush-privileges \
     --all-databases \
     | mysql -uroot
-
-#mysql -uroot -p${MYSQL_ROOT_PASSWORD} < master.dump
-#rm master.dump
 
 # start slave
 mysql -uroot -e "START SLAVE;"
