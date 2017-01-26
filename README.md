@@ -1,25 +1,26 @@
 # mysql-replication
-A custom docker image with replication enabled.
+A custom mysql docker image with replication enabled.
 
 ## Introduction
 The image is based on official [mysql-server](https://hub.docker.com/r/mysql/mysql-server/) with replication enabled
 for the purpose of learning mysql.
 
 ### Environment Variables
+**SERVER_ID**  
+Make sure every node has a **different** server id.
+
 **REPLICATION_USER**  
 The user name for replication.
 
 **REPLICATION_PASSWORD**  
 The password of replication user.
 
-**SERVER_ID**  
-Make sure every node has a **different** server id.
-
 ## Getting Started
 1. Download the image
     ```sh
     docker pull mottox/mysql-replication
     ```
+   Alternatively, you could also clone this repository and build the image locally.
 
 2. Run master node with
     ```sh
@@ -37,7 +38,7 @@ Make sure every node has a **different** server id.
    ```
    The expected `Slave_IO_State` should be `Waiting for master to send event`.
 
-5. Test replication
+5. Test replication freely
 
 ## Inspiration
 [official mysql image](https://github.com/docker-library/mysql)  
