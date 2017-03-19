@@ -2,6 +2,9 @@
 
 [mysqld]
 log_bin=mysql-bin
+relay_log=/var/lib/mysql/mysql-relay-bin
+log_slave_updates=1
+read_only=1
 
 # join_buffer_size = 128M
 # sort_buffer_size = 2M
