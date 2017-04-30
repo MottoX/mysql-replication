@@ -3,10 +3,7 @@ set -eo pipefail
 
 MYSQL_CNF_FILE="/etc/my.cnf"
 
-if [ -n "$REPLICATION_PORT_3306_TCP_ADDR" ]; then
-    export MASTER_HOST=$REPLICATION_PORT_3306_TCP_ADDR
-    export MASTER_PORT=$REPLICATION_PORT_3306_TCP_PORT
-
+if [ -n "$REPLICATION_MASTER_HOST" ]; then
     cp slave.cnf ${MYSQL_CNF_FILE}
 
     cp init_slave.sh /docker-entrypoint-initdb.d/

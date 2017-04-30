@@ -1,0 +1,21 @@
+version: '3'
+services:
+    master:
+        build: '.'
+        image: 'mottox/mysql-replication'
+        container_name: 'master'
+        environment:
+            SERVER_ID: '1'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+            MYSQL_ROOT_HOST: '%'
+    slave:
+        build: '.'
+        image: 'mottox/mysql-replication'
+        container_name: 'slave'
+        environment:
+            SERVER_ID: '2'
+            REPLICATION_MASTER_HOST: 'master'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+            MYSQL_ROOT_HOST: '%'
+        depends_on: 
+            - 'master'

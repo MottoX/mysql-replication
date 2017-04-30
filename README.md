@@ -1,9 +1,9 @@
 # mysql-replication
-A custom mysql docker image with replication enabled.
+A custom mysql docker image with replication enabled, easy and convenient to set up MySQL master-slave replication in 30 seconds.
 
 ## Introduction
 The image is based on official [mysql-server](https://hub.docker.com/r/mysql/mysql-server/) with replication enabled
-for the purpose of learning mysql.
+for the purpose of learning mysql. Note that this image is for people who want to learn and practice MySQL replication in an easy way.
 
 ### Environment Variables
 **SERVER_ID**  
@@ -24,21 +24,35 @@ The password of replication user.
 
 2. Run master node with
     ```sh
-    docker run --name master -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e SERVER_ID=1 -d mottox/mysql-replication
+    docker run \
+    --name master \
+    -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
+    -e MYSQL_ROOT_HOST=% \
+    -e SERVER_ID=1 \
+    -d mottox/mysql-replication
     ```
 
-3. Run slave node with
+   And then Run slave node with
     ```sh
-    docker run --name slave -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e SERVER_ID=2 --link master:replication -d mottox/mysql-replication
+    docker run \
+    --name slave \
+    -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
+    -e MYSQL_ROOT_HOST=% \
+    -e SERVER_ID=2 \
+    -e REPLICATION_MASTER_HOST=master \
+    --link master:replication   \
+    -d mottox/mysql-replication
     ```
-
-4. Check if replication is ready
+    
+   Instead of run the two commands above, you could also copy and use the `docker-compose.yml` configuration file 
+   and run `docker-compose up` to set up master-slave replication.
+3. Check if replication is ready
    ```sh
    docker exec -it slave mysql -e 'show slave status\G'
    ```
    The expected `Slave_IO_State` should be `Waiting for master to send event`.
 
-5. Test replication freely
+4. Test replication freely
 
 ## Inspiration
 [official mysql image](https://github.com/docker-library/mysql)  
