@@ -44,7 +44,7 @@ The password of replication user.
     -d mottox/mysql-replication
     ```
     
-   Instead of run the two commands above, you could also copy and use the `docker-compose.yml` configuration file 
+   Instead of running the two commands above, you can also copy and use the `docker-compose.yml` configuration file 
    and run `docker-compose up` to set up master-slave replication.
 3. Check if replication is ready
    ```sh
